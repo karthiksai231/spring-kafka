@@ -16,9 +16,9 @@ import static net.logstash.logback.argument.StructuredArguments.keyValue;
 public class ProducerService {
   private final KafkaTemplate<String, String> kafkaConsumer;
 
-  public ListenableFuture<SendResult<String, String>> publishEvent() {
+  public ListenableFuture<SendResult<String, String>> publishEvent(String message) {
     ListenableFuture<SendResult<String, String>> future = kafkaConsumer.send("first_topic",
-        "Kafka Spring implementation");
+        message);
     future.addCallback(new ListenableFutureCallback<>() {
 
       @Override

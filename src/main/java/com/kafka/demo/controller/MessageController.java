@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.UUID;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/v1/message")
@@ -15,7 +17,11 @@ public class MessageController {
 
   @PostMapping
   public ResponseEntity postMessage() {
-    producerService.publishEvent();
+    int i = 0;
+    while (i <= 10) {
+      producerService.publishEvent(UUID.randomUUID().toString() + "_" + i);
+      i++;
+    }
     return ResponseEntity.ok("Success");
   }
 }
